@@ -35,6 +35,7 @@ const getTechs = (params: ParamsType) => {
         )
         .catch((e) => {
             alert(e.response?.data?.errorText || e.message)
+            return null
         })
 }
 
@@ -51,22 +52,32 @@ const HW15 = () => {
         setLoading(true)
         getTechs(params)
             .then((res) => {
+                console.log(res)
                 // делает студент
+                if(res) {
+                    setTechs(res.data.techs)
+                    setTotalCount(res.data.totalCount)
+                }
+
 
                 // сохранить пришедшие данные
 
                 //
-            })
+            }).finally(() => setLoading(false))
     }
 
     const onChangePagination = (newPage: number, newCount: number) => {
         // делает студент
 
         // setPage(
+        setPage(newPage)
         // setCount(
+        setCount(newCount)
 
         // sendQuery(
+        sendQuery({page: newPage, count: newCount})
         // setSearchParams(
+        setSearchParams({page:String(newPage),count:String(newCount)})
 
         //
     }
@@ -75,9 +86,11 @@ const HW15 = () => {
         // делает студент
 
         // setSort(
+        setSort(newSort)
         // setPage(1) // при сортировке сбрасывать на 1 страницу
-
+        setPage(1)
         // sendQuery(
+        sendQuery({page: page, count: count, sort: newSort})
         // setSearchParams(
 
         //

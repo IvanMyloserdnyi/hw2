@@ -38,8 +38,8 @@ const HW14 = () => {
                 // делает студент
 
                 // сохранить пришедшие данные
-                if (res?.data.techs) {
-                    setTechs(res?.data.techs)
+                if (res) {
+                    setTechs(res.data.techs)
                 }
                 //
             })
